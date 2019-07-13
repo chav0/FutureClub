@@ -1,3 +1,4 @@
+using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Presenters;
 
 namespace Project.Scripts.Views
@@ -7,11 +8,10 @@ namespace Project.Scripts.Views
         bool IsGameOver { get; }
         int CoinsCollectedInLastGame { get; }
         int ScoreCollectedInLastGame { get; }
-        float CurrentProgress { get; }
 
         void Update(ApplicationState state);
 
-        void SetDirectionOfPresss(Direction direction);
+        void SetDirectionOfPress(Direction direction, float multiplier);
         void ResetWorld();
         void SetPause(bool toTrue);
     }

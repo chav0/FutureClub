@@ -1,4 +1,5 @@
 using Project.Scripts.Models;
+using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Views;
 
 namespace Project.Scripts.Presenters
@@ -24,7 +25,7 @@ namespace Project.Scripts.Presenters
             
             _gameplayView.Update(_state);
             _model.Update();
-            _interfaceView.Update(_model.Coins + _gameplayView.CoinsCollectedInLastGame, _gameplayView.CurrentProgress, 0, 1, _state);
+            _interfaceView.Update(_model.Coins + _gameplayView.CoinsCollectedInLastGame, 0, 1, _state);
 
             if (_state == ApplicationState.Game)
             {
@@ -33,19 +34,23 @@ namespace Project.Scripts.Presenters
                     _interfaceView.ShowGameOver();
                     _state = ApplicationState.Results; 
                 }                
-                else if (_interfaceView.IsLeftPressed)
+                else if (_interfaceView.IsLeftPressed.TryGet(out var multiplier))
                 {
-                    _gameplayView.SetDirectionOfPresss(Direction.Left);
+                    _gameplayView.SetDirectionOfPress(Direction.Left, multiplier);
                 }
-                else if (_interfaceView.IsRightPressed)
+                else if (_interfaceView.IsRightPressed.TryGet(out multiplier))
                 {
-                    _gameplayView.SetDirectionOfPresss(Direction.Right);
+                    _gameplayView.SetDirectionOfPress(Direction.Right, multiplier);
                 }
-                else if (_interfaceView.IsPausePressed)
+                else
                 {
-                    _interfaceView.ShowPause();
-                    _gameplayView.SetPause(true);
-                    _state = ApplicationState.Pause; 
+                    _gameplayView.SetDirectionOfPress(Direction.None, 0);
+                    if (_interfaceView.IsPausePressed)
+                    {
+                        _interfaceView.ShowPause();
+                        _gameplayView.SetPause(true);
+                        _state = ApplicationState.Pause;
+                    }
                 }
             } 
             else if (_state == ApplicationState.Results)

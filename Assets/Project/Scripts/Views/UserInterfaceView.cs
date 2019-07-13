@@ -11,14 +11,14 @@ namespace Project.Scripts.Views
     public class UserInterfaceView : IUserInterfaceView
     {
         private Screens _screens;
-        private readonly UIMessage _leftClick = new UIMessage(); 
-        private readonly UIMessage _rightClick = new UIMessage();
+        private readonly UIMessage<int> _leftClick = new UIMessage<int>(); 
+        private readonly UIMessage<int>  _rightClick = new UIMessage<int>();
         private readonly UIMessage _pause = new UIMessage();
         private readonly UIMessage _newGame = new UIMessage();
         private readonly UIMessage _continue = new UIMessage(); 
 
-        public bool IsLeftPressed => _leftClick.TryGet();
-        public bool IsRightPressed => _rightClick.TryGet();
+        public UIMessage<int> IsLeftPressed => _leftClick;
+        public UIMessage<int> IsRightPressed => _rightClick;
         public bool IsPausePressed => _pause.TryGet();
         public bool NewGame => _newGame.TryGet();
         public bool IsContinuePressed => _continue.TryGet(); 
@@ -27,27 +27,29 @@ namespace Project.Scripts.Views
         {
             _screens = screens; 
             
-            _screens.InputField.Left.onClick.AddListener(_leftClick.Set);
-            _screens.InputField.Right.onClick.AddListener(_rightClick.Set);
-            _screens.HUD.Pause.onClick.AddListener(_pause.Set);
+
             _screens.Pause.Continue.onClick.AddListener(_continue.Set);
         }
 
 
-        public void Update(int coins, float progress, int score, int level, ApplicationState state)
+        public void Update(int coins, int score, int level, ApplicationState state)
         {
             if (state == ApplicationState.Game)
             {
-                _screens.HUD.Coins.text = coins.ToString();
-                _screens.HUD.Progress.value = progress;
-                _screens.HUD.Level1.text = level.ToString();
-                _screens.HUD.Level2.text = (++level).ToString();
 
-                if (progress >= 1f)
-                {
-                    _screens.HUD.FullProgress();
-                }
             }
+            
+            if(_screens.InputField.Left.IsWalking)
+                _leftClick.Set(1);
+            
+            if(_screens.InputField.Left.IsRunning)
+                _leftClick.Set(2);
+            
+            if(_screens.InputField.Right.IsWalking)
+                _rightClick.Set(1);
+            
+            if(_screens.InputField.Right.IsRunning)
+                _rightClick.Set(2);
         }
 
         public void ShowGameOver()
