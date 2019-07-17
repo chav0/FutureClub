@@ -300,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Screens: {fileID: 544315656}
   Player: {fileID: 852706138}
+  Level: {fileID: 1473708276}
 --- !u!4 &27428555
 Transform:
   m_ObjectHideFlags: 0
@@ -2807,6 +2808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473708275}
+  - component: {fileID: 1473708276}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -2831,6 +2833,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473708276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473708274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89426a396231af74d9fc9b7d5144b679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstPlan: {fileID: 1591070845}
+  BackPlan: {fileID: 776311085}
 --- !u!1 &1526452638
 GameObject:
   m_ObjectHideFlags: 0
