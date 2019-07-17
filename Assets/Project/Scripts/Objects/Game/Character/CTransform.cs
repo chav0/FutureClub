@@ -1,4 +1,5 @@
-﻿using UnityEditorInternal.Profiling.Memory.Experimental;
+﻿using System;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 namespace Project.Scripts.Objects.Game.Character
@@ -8,6 +9,10 @@ namespace Project.Scripts.Objects.Game.Character
         public Transform Transform;
         public float Speed { get; set; }
         private Animator _animator;
+        private float _lerpedMultiplier; 
+        
+        
+        public Vector3 Position => Transform.position; 
 
         public CTransform(Transform transform, float speed, Animator animator)
         {
@@ -18,12 +23,15 @@ namespace Project.Scripts.Objects.Game.Character
 
         public void Move(Direction direction, float multiplier = 1f)
         {
-            Transform.position += new Vector3(multiplier * Speed * Time.deltaTime * (int) direction, 0f, 0f);
+
+            _lerpedMultiplier = Mathf.Lerp(_lerpedMultiplier, multiplier, .1f);
+            
+            Transform.position += new Vector3(_lerpedMultiplier * Speed * Time.deltaTime * (int) direction, 0f, 0f);
             
             if(direction != Direction.None)
                 Transform.localScale = new Vector3((int) direction, 1f, 1f);
             
-            _animator.SetFloat("Blend", multiplier);
+            _animator.SetFloat("Blend", _lerpedMultiplier);
         }
     }
 

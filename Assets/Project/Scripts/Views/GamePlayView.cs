@@ -9,15 +9,17 @@ namespace Project.Scripts.Views
     public class GamePlayView : IGameplayView
     {
         private Player _player;
+        private Level _level; 
         private List<Coin> _coins; 
         
         public bool IsGameOver { get; private set; }
         public int CoinsCollectedInLastGame { get; private set; }
         public int ScoreCollectedInLastGame { get; private set; }
 
-        public GamePlayView(Player player)
+        public GamePlayView(Player player, Level level)
         {
-            _player = player; 
+            _player = player;
+            _level = level; 
             _coins = new List<Coin>();
         }
         
@@ -49,6 +51,7 @@ namespace Project.Scripts.Views
         public void SetDirectionOfPress(Direction direction, float multiplier)
         {
             _player.Transform.Move(direction, multiplier);
+            _level.Move(_player.Transform.Position);
         }
 
         public void ResetWorld()

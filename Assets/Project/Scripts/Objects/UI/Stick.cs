@@ -13,7 +13,6 @@ namespace Project.Scripts.Objects.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log((DateTime.Now - _timePointerDown).TotalMilliseconds);
             if ((DateTime.Now - _timePointerDown).TotalMilliseconds < 500f)
                 IsRunning = true;
             else

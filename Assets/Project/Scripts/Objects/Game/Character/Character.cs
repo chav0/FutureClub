@@ -7,7 +7,7 @@ namespace Project.Scripts.Objects.Game.Character
         [SerializeField] private float _speed;
         [SerializeField] private int _health;
         [SerializeField] private Animator _animator;
-
+        
         private void Awake()
         {
             Health = new Health(_health);

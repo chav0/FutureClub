@@ -13,11 +13,12 @@ namespace Project.Scripts
     {
         private IApplicationPresenter _presenter;
         public Screens Screens;
-        public Player Player; 
+        public Player Player;
+        public Level Level; 
         
         public void Start()
         {
-            IGameplayView gameplayView = new GamePlayView(Player);
+            IGameplayView gameplayView = new GamePlayView(Player, Level);
             IApplicationModel model = new ApplicationModel();
             IUserInterfaceView uiView = new UserInterfaceView(Screens);
             _presenter = new ApplicationPresenter(gameplayView, uiView, model);
