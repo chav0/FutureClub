@@ -34,10 +34,7 @@ namespace Project.Scripts.Views
 
         public void Update(int coins, int score, int level, ApplicationState state)
         {
-            if (state == ApplicationState.Game)
-            {
-
-            }
+            _screens.HUD.Coins.text = coins.ToString(); 
             
             if(_screens.InputField.Left.IsWalking)
                 _leftClick.Set(1);

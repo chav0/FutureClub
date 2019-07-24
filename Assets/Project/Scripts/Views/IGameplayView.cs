@@ -6,8 +6,7 @@ namespace Project.Scripts.Views
     public interface IGameplayView
     {
         bool IsGameOver { get; }
-        int CoinsCollectedInLastGame { get; }
-        int ScoreCollectedInLastGame { get; }
+        int Coins { get; }
 
         void Update(ApplicationState state);
 

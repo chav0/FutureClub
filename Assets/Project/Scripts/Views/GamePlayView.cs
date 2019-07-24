@@ -10,17 +10,15 @@ namespace Project.Scripts.Views
     {
         private Player _player;
         private Level _level; 
-        private List<Coin> _coins; 
         
         public bool IsGameOver { get; private set; }
-        public int CoinsCollectedInLastGame { get; private set; }
+        public int Coins { get; private set; }
         public int ScoreCollectedInLastGame { get; private set; }
 
         public GamePlayView(Player player, Level level)
         {
             _player = player;
             _level = level; 
-            _coins = new List<Coin>();
         }
         
         public void Update(ApplicationState state)
@@ -35,14 +33,14 @@ namespace Project.Scripts.Views
         {
             IsGameOver = _player.Health.IsDead;
 
-            for (var i = 0; i < _coins.Count; i++)
+            for (var i = 0; i < _level.Coins.Count; i++)
             {
-                var coin = _coins[i];
+                var coin = _level.Coins[i];
 
                 if (coin.IsCollisionEnter)
                 {
-                    CoinsCollectedInLastGame += coin.Value;
-                    _coins.RemoveAt(i);
+                    Coins += coin.Value;
+                    _level.Coins.RemoveAt(i);
                     coin.Realise();
                 }
             }
@@ -57,7 +55,7 @@ namespace Project.Scripts.Views
         public void ResetWorld()
         {
             IsGameOver = false;
-            CoinsCollectedInLastGame = 0;
+            Coins = 0;
             ScoreCollectedInLastGame = 0; 
         }
 

@@ -1,4 +1,4 @@
-﻿using Project.Scripts.Objects.Game.Character;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Scripts.Objects.Game
@@ -7,8 +7,7 @@ namespace Project.Scripts.Objects.Game
     { 
         public Transform FirstPlan;
         public Transform BackPlan;
-
-        
+        public List<Coin> Coins; 
         
         public void Move(Vector3 position)
         {
