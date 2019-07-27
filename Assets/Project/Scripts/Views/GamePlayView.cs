@@ -44,6 +44,18 @@ namespace Project.Scripts.Views
                     coin.Realise();
                 }
             }
+
+            foreach (var tower in _level.Towers)
+            {
+                if (tower.Build.TryGet())
+                {
+                    if (tower.Cost <= Coins && tower.State == TowerState.Ruin)
+                    {
+                        tower.ChangeState(TowerState.Building);
+                        Coins -= tower.Cost; 
+                    }
+                }
+            }
         }
 
         public void SetDirectionOfPress(Direction direction, float multiplier)

@@ -7,7 +7,8 @@ namespace Project.Scripts.Objects.Game
     { 
         public Transform FirstPlan;
         public Transform BackPlan;
-        public List<Coin> Coins; 
+        public List<Coin> Coins;
+        public List<Tower> Towers; 
         
         public void Move(Vector3 position)
         {
