@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Project.Scripts.Objects.Game.Character;
 using UnityEngine;
 
 namespace Project.Scripts.Objects.Game
@@ -8,7 +9,9 @@ namespace Project.Scripts.Objects.Game
         public Transform FirstPlan;
         public Transform BackPlan;
         public List<Coin> Coins;
-        public List<Tower> Towers; 
+        public List<Tower> Towers;
+        public Transform MainBuilding;
+        public List<Portal> Portals; 
         
         public void Move(Vector3 position)
         {

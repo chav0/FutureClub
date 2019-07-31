@@ -13,9 +13,8 @@ namespace Project.Scripts.Objects.Game
         [SerializeField] private int _health; 
         [SerializeField] private int _cost;
         [SerializeField] private Button _button; 
-        [SerializeField] private Sprite _ruin;
-        [SerializeField] private Sprite _building; 
-        [SerializeField] private SpriteRenderer _spriteRenderer; 
+        [SerializeField] private GameObject _ruin;
+        [SerializeField] private GameObject _building;  
         
         private bool _isCollisionEnter;
         
@@ -30,7 +29,7 @@ namespace Project.Scripts.Objects.Game
             get => _isCollisionEnter;
             set
             {
-                _button.gameObject.SetActive(value);
+                _button.gameObject.SetActive(value && State == TowerState.Ruin);
                 _isCollisionEnter = value;
             }
         }
@@ -52,12 +51,15 @@ namespace Project.Scripts.Objects.Game
                 case TowerState.Ruin:
                     State = TowerState.Building;
                     Health.CurrentHealth = _health;
-                    _spriteRenderer.sprite = _building; 
+                    _ruin.SetActive(false);
+                    _building.SetActive(true);
+                    _button.gameObject.SetActive(false);
                     break;
                 case TowerState.Building:
                     Health.CurrentHealth = 0; 
                     State = TowerState.Ruin;
-                    _spriteRenderer.sprite = _ruin; 
+                    _ruin.SetActive(true);
+                    _building.SetActive(false);
                     break;
             }
         }

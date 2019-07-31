@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Project.Scripts.Models;
 using Project.Scripts.Objects.Game;
 using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Presenters;
@@ -9,16 +11,27 @@ namespace Project.Scripts.Views
     public class GamePlayView : IGameplayView
     {
         private Player _player;
-        private Level _level; 
+        private Level _level;
+        private Settings _settings; 
         
         public bool IsGameOver { get; private set; }
         public int Coins { get; private set; }
         public int ScoreCollectedInLastGame { get; private set; }
 
-        public GamePlayView(Player player, Level level)
+        private int _ticksPerDay; 
+        
+        public GamePlayView(Player player, Level level, Settings settings)
         {
             _player = player;
-            _level = level; 
+            _level = level;
+            _settings = settings;
+
+            foreach (var portal in _level.Portals)
+            {
+                portal.TickSpawn = (int) Math.Truncate(portal.TimeToSpawn * _settings.DayDuration / Time.fixedDeltaTime);
+            }
+
+            _ticksPerDay = (int) Math.Truncate(settings.DayDuration / Time.fixedDeltaTime); 
         }
         
         public void Update(ApplicationState state)
@@ -32,6 +45,8 @@ namespace Project.Scripts.Views
         private void GameUpdate()
         {
             IsGameOver = _player.Health.IsDead;
+            var day = (int) Math.Truncate(TimeHelper.CurrentTick / (float) _ticksPerDay);
+            var tickOfDay = TimeHelper.CurrentTick % _ticksPerDay; 
 
             for (var i = 0; i < _level.Coins.Count; i++)
             {
@@ -55,6 +70,18 @@ namespace Project.Scripts.Views
                         Coins -= tower.Cost; 
                     }
                 }
+            }
+
+            foreach (var portal in _level.Portals)
+            {
+                if (portal.SpawnDays.Contains(day))
+                {
+                    if (portal.TickSpawn == tickOfDay)
+                    {
+                        portal.Spawn();
+                    }
+                }
+                
             }
         }
 

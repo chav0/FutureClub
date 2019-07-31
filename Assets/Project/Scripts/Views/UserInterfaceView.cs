@@ -15,7 +15,8 @@ namespace Project.Scripts.Views
         private readonly UIMessage<int>  _rightClick = new UIMessage<int>();
         private readonly UIMessage _pause = new UIMessage();
         private readonly UIMessage _newGame = new UIMessage();
-        private readonly UIMessage _continue = new UIMessage(); 
+        private readonly UIMessage _continue = new UIMessage();
+        private Settings _settings;
 
         public UIMessage<int> IsLeftPressed => _leftClick;
         public UIMessage<int> IsRightPressed => _rightClick;
@@ -23,10 +24,10 @@ namespace Project.Scripts.Views
         public bool NewGame => _newGame.TryGet();
         public bool IsContinuePressed => _continue.TryGet(); 
 
-        public UserInterfaceView(Screens screens)
+        public UserInterfaceView(Screens screens, Settings settings)
         {
-            _screens = screens; 
-            
+            _screens = screens;
+            _settings = settings; 
 
             _screens.Pause.Continue.onClick.AddListener(_continue.Set);
         }
@@ -34,7 +35,8 @@ namespace Project.Scripts.Views
 
         public void Update(int coins, int score, int level, ApplicationState state)
         {
-            _screens.HUD.Coins.text = coins.ToString(); 
+            _screens.HUD.Coins.text = coins.ToString();
+            _screens.DayColor.color = _settings.DayColors.Evaluate((Time.time % _settings.DayDuration) / _settings.DayDuration); 
             
             if(_screens.InputField.Left.IsWalking)
                 _leftClick.Set(1);
