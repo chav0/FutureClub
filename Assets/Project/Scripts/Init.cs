@@ -26,9 +26,14 @@ namespace Project.Scripts
             _presenter = new ApplicationPresenter(gameplayView, uiView, model);
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             _presenter.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            _presenter.FixedUpdate();
         }
     }
 

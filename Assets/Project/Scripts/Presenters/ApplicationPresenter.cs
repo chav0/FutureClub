@@ -22,7 +22,6 @@ namespace Project.Scripts.Presenters
         
         public void Update()
         {
-            TimeHelper.Update();
             _gameplayView.Update(_state);
             _model.Update();
             _model.Coins = _gameplayView.Coins; 
@@ -75,6 +74,12 @@ namespace Project.Scripts.Presenters
                     _state = ApplicationState.Game; 
                 }
             }
+        }
+
+        public void FixedUpdate()
+        {
+            _gameplayView.FixedUpdate(_state);
+            TimeHelper.Update();
         }
     }
 

@@ -9,6 +9,7 @@ namespace Project.Scripts.Views
         int Coins { get; }
 
         void Update(ApplicationState state);
+        void FixedUpdate(ApplicationState state);
 
         void SetDirectionOfPress(Direction direction, float multiplier);
         void ResetWorld();

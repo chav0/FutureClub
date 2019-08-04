@@ -11,7 +11,7 @@ namespace Project.Scripts.Objects.Game.Character
             if(coin != null)
                 coin.IsCollisionEnter = true;
 
-            var tower = col.gameObject.GetComponent<Tower>();
+            var tower = col.gameObject.GetComponent<Place>();
             
             if(tower != null)
                 tower.IsCollisionEnter = true;
@@ -19,7 +19,7 @@ namespace Project.Scripts.Objects.Game.Character
 
         private void OnTriggerExit2D(Collider2D col)
         {
-            var tower = col.gameObject.GetComponent<Tower>();
+            var tower = col.gameObject.GetComponent<Place>();
             
             if(tower != null)
                 tower.IsCollisionEnter = false;

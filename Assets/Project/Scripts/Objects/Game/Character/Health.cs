@@ -16,7 +16,10 @@ namespace Project.Scripts.Objects.Game.Character
 
         public void Damage(int damage)
         {
-            CurrentHealth -= damage; 
+            CurrentHealth -= damage;
+
+            if (CurrentHealth < 0)
+                CurrentHealth = 0; 
         }
     }
 }

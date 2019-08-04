@@ -11,63 +11,28 @@ namespace Project.Scripts.Objects.Game
     public class Tower : MonoBehaviour
     {
         [SerializeField] private int _health; 
-        [SerializeField] private int _cost;
-        [SerializeField] private Button _button; 
-        [SerializeField] private GameObject _ruin;
-        [SerializeField] private GameObject _building;  
-        
-        private bool _isCollisionEnter;
-        
+        [SerializeField] private int _cost; 
+        [SerializeField] private Slider _healthBar;
+
+        public int Damage;
+
         public Health Health;
-        public TowerState State { get; set; }
         public int Cost => _cost;
-        public UIMessage Build = new UIMessage();
 
-
-        public bool IsCollisionEnter
+        private void Update()
         {
-            get => _isCollisionEnter;
-            set
-            {
-                _button.gameObject.SetActive(value && State == TowerState.Ruin);
-                _isCollisionEnter = value;
-            }
+            _healthBar.gameObject.SetActive(Health.CurrentHealth  != Health.MaxHealth);
+            _healthBar.value = Health.CurrentHealth / (float) Health.MaxHealth; 
         }
 
-        private void Awake()
+        private void OnEnable()
         {
             Health = new Health(_health);
-            Health.CurrentHealth = 0; 
-            State = TowerState.Ruin; 
-            _button.onClick.AddListener(Build.Set);
         }
 
-        public void ChangeState(TowerState newState)
+        private void OnDisable()
         {
-            if (newState == State) return;
-            
-            switch (State)
-            {
-                case TowerState.Ruin:
-                    State = TowerState.Building;
-                    Health.CurrentHealth = _health;
-                    _ruin.SetActive(false);
-                    _building.SetActive(true);
-                    _button.gameObject.SetActive(false);
-                    break;
-                case TowerState.Building:
-                    Health.CurrentHealth = 0; 
-                    State = TowerState.Ruin;
-                    _ruin.SetActive(true);
-                    _building.SetActive(false);
-                    break;
-            }
+            _healthBar.gameObject.SetActive(false);
         }
-    }
-
-    public enum TowerState
-    {
-        Ruin,
-        Building,
     }
 }

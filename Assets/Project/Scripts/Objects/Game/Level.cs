@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.Objects.Game.Character;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Project.Scripts.Objects.Game
         public Transform FirstPlan;
         public Transform BackPlan;
         public List<Coin> Coins;
-        public List<Tower> Towers;
+        public List<Place> Places;
         public Transform MainBuilding;
         public List<Portal> Portals; 
         
