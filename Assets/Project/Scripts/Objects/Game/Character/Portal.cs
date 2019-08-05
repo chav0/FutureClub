@@ -19,7 +19,7 @@ namespace Project.Scripts.Objects.Game.Character
             {
                 var enemy = Instantiate(EnemyPrefab);
                 enemy.Transform.Transform.position =
-                    new Vector3(transform.position.x + 15f * Random.value, -21f, 0f); 
+                    new Vector3(transform.position.x + 35f * Random.value, -21f, 0f); 
                 enemies.Add(enemy);
             }
 

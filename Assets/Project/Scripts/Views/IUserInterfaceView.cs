@@ -11,7 +11,7 @@ namespace Project.Scripts.Views
         bool NewGame { get; }
         bool IsContinuePressed { get; }
 
-        void Update(int coins, int score, int level, ApplicationState state);
+        void Update(int coins, int seeds, int food, int score, int level, ApplicationState state);
 
         void ShowGameOver();
         void ShowNewGame();

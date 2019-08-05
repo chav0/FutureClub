@@ -14,12 +14,25 @@ namespace Project.Scripts.Objects.Game.Character
             CurrentHealth = health; 
         }
 
+        public void Heal(int hpPoint)
+        {
+            CurrentHealth += hpPoint;
+
+            if (CurrentHealth > MaxHealth)
+                CurrentHealth = MaxHealth; 
+        }
+        
         public void Damage(int damage)
         {
             CurrentHealth -= damage;
 
             if (CurrentHealth < 0)
                 CurrentHealth = 0; 
+        }
+
+        public void RestoreHealth()
+        {
+            CurrentHealth = MaxHealth; 
         }
     }
 }

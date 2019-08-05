@@ -8,22 +8,15 @@ using UnityEngine.UI;
 
 namespace Project.Scripts.Objects.Game
 {
-    public class Tower : MonoBehaviour
+    public class Fence : MonoBehaviour
     {
         [SerializeField] private int _health; 
         [SerializeField] private int _cost; 
         [SerializeField] private Slider _healthBar;
-        [SerializeField] private float _delay;
-        [SerializeField] private Vector3 _pointPotatoSpawn;
-
-        public float Range; 
-
-        public Potato PotatoPrefab;
 
         public Health Health;
         public int Cost => _cost;
 
-        private float _timer; 
         private void Update()
         {
             _healthBar.gameObject.SetActive(Health.CurrentHealth  != Health.MaxHealth);
@@ -38,18 +31,6 @@ namespace Project.Scripts.Objects.Game
         private void OnDisable()
         {
             _healthBar.gameObject.SetActive(false);
-        }
-
-        public void Attack(Vector3 enemyPosition)
-        {
-            if (Time.time - _timer >= _delay)
-            {
-                var potato = Instantiate(PotatoPrefab, transform);
-                potato.gameObject.SetActive(true);
-                potato.transform.localPosition = _pointPotatoSpawn; 
-                potato.Direction = (enemyPosition - potato.transform.position).normalized;
-                _timer = Time.time; 
-            }
         }
     }
 }

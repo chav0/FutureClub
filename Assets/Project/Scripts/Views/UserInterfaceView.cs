@@ -33,9 +33,11 @@ namespace Project.Scripts.Views
         }
 
 
-        public void Update(int coins, int score, int level, ApplicationState state)
+        public void Update(int coins, int seeds, int food, int score, int level, ApplicationState state)
         {
             _screens.HUD.Coins.text = coins.ToString();
+            _screens.HUD.Seeds.text = seeds.ToString(); 
+            _screens.HUD.Foods.text = food.ToString(); 
             _screens.DayColor.color = _settings.DayColors.Evaluate((Time.time % _settings.DayDuration) / _settings.DayDuration); 
             
             if(_screens.InputField.Left.IsWalking)

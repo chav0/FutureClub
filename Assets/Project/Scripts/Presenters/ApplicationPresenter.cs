@@ -25,7 +25,7 @@ namespace Project.Scripts.Presenters
             _gameplayView.Update(_state);
             _model.Update();
             _model.Coins = _gameplayView.Coins; 
-            _interfaceView.Update( _model.Coins, 0, 1, _state);
+            _interfaceView.Update( _model.Coins, _gameplayView.Seeds, _gameplayView.Food, 0, 1, _state);
 
             if (_state == ApplicationState.Game)
             {

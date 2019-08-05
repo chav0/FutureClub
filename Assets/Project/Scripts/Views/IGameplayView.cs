@@ -7,6 +7,8 @@ namespace Project.Scripts.Views
     {
         bool IsGameOver { get; }
         int Coins { get; }
+        int Seeds { get; }
+        int Food { get; }
 
         void Update(ApplicationState state);
         void FixedUpdate(ApplicationState state);

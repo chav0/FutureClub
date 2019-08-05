@@ -7,9 +7,7 @@ namespace Project.Scripts.Objects.UI
     public class HUDScreen : MonoBehaviour
     {
         public TextMeshProUGUI Coins; 
-        public void FullProgress()
-        {
-
-        }
+        public TextMeshProUGUI Seeds; 
+        public TextMeshProUGUI Foods; 
     }
 }

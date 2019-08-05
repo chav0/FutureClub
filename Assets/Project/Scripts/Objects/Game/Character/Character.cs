@@ -8,10 +8,10 @@ namespace Project.Scripts.Objects.Game.Character
         [SerializeField] private float _speed;
         [SerializeField] private int _health;
         [SerializeField] private Animator _animator;
-        [SerializeField] private Slider _healthBar; 
-        [SerializeField] private Canvas _canvas; 
-        
-        private void Awake()
+        [SerializeField] private Image _healthBar; 
+        [SerializeField] private Canvas _canvas;
+
+        public void Awake()
         {
             Health = new Health(_health);
             Transform = new CTransform(transform, _speed, _animator, _canvas);
@@ -21,8 +21,7 @@ namespace Project.Scripts.Objects.Game.Character
         {
             if (_healthBar != null)
             {
-                _healthBar.gameObject.SetActive(Health.CurrentHealth  != Health.MaxHealth);
-                _healthBar.value = Health.CurrentHealth / (float) Health.MaxHealth; 
+                _healthBar.fillAmount = Health.CurrentHealth / (float) Health.MaxHealth; 
             }
         }
 

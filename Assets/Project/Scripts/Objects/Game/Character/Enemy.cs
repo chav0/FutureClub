@@ -9,32 +9,87 @@ namespace Project.Scripts.Objects.Game.Character
     public class Enemy : Character
     {
         public float DamageDelay;
-        public int Damage; 
+        public int Damage;
+        public float CoinProbability;
+        public float SeedsProbability; 
         private Sequence _sequence;
         private bool _canDamage;
-
+        private List<Health> _triggeredHealths = new List<Health>();
+        
         public bool IsAttack { get; set; }
+        public bool IsDead { get; set; }
 
-        private void OnTriggerStay2D(Collider2D col)
+        private void Update()
+        {
+            Attack();
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
             var player = col.gameObject.GetComponent<Player>();
 
             if (player != null)
-            {
-                Attack(player.Health);
-            } 
+                _triggeredHealths.Add(player.Health);
 
             var tower = col.gameObject.GetComponent<Tower>();
+
+            if (tower != null)
+                _triggeredHealths.Add(tower.Health);
+
+            var fence = col.gameObject.GetComponent<Fence>();
+
+            if (fence != null)
+                _triggeredHealths.Add(fence.Health);
             
-            if(tower != null)
-                Attack(tower.Health); 
+            var ridge = col.gameObject.GetComponent<Ridge>();
+
+            if (ridge != null)
+                _triggeredHealths.Add(ridge.Health);
+            
+            var potato = col.gameObject.GetComponent<Potato>();
+
+            if (potato != null && !potato.IsCollisionEnemy)
+            {
+                Health.Damage(potato.Damage);
+                potato.IsCollisionEnemy = true; 
+            }
         }
 
-        private void Attack(Health health)
+        private void OnTriggerExit2D(Collider2D col)
         {
+            var player = col.gameObject.GetComponent<Player>();
+
+            if (player != null)
+                _triggeredHealths.Remove(player.Health);
+
+            var tower = col.gameObject.GetComponent<Tower>();
+
+            if (tower != null)
+                _triggeredHealths.Remove(tower.Health);
+
+            var fence = col.gameObject.GetComponent<Fence>();
+
+            if (fence != null)
+                _triggeredHealths.Remove(fence.Health);
+            
+            var ridge = col.gameObject.GetComponent<Ridge>();
+
+            if (ridge != null)
+                _triggeredHealths.Remove(ridge.Health);
+        }
+
+        private void Attack()
+        {
+            Health health = null;
+
+            if (_triggeredHealths.Count > 0)
+            {
+                health = _triggeredHealths[0]; 
+            }
+            
             if (_canDamage)
             {
-                health.Damage(Damage);
+                health?.Damage(Damage);
                 _canDamage = false;
             }
 
@@ -44,7 +99,10 @@ namespace Project.Scripts.Objects.Game.Character
                 return;
             }
 
-            if (health.CurrentHealth == 0)
+            if (health != null && health.CurrentHealth == 0)
+                return;
+            
+            if (health == null)
                 return;
 
             IsAttack = true;
@@ -63,6 +121,7 @@ namespace Project.Scripts.Objects.Game.Character
         public void Death()
         {
             SetState("Death");
+            IsDead = true; 
             
             _sequence?.Kill(); 
             _sequence = DOTween.Sequence()
