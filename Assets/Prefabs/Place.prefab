@@ -3357,11 +3357,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower
       objectReference: {fileID: 0}
-    - target: {fileID: 5003394553512135022, guid: 7d70cb672d281c4429b88b481c5ed779,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5003394553512135021, guid: 7d70cb672d281c4429b88b481c5ed779,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3422,11 +3417,6 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 3505467269090062949}
-    - target: {fileID: 2956439634577496911, guid: 7d70cb672d281c4429b88b481c5ed779,
-        type: 3}
-      propertyPath: Range
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d70cb672d281c4429b88b481c5ed779, type: 3}
 --- !u!4 &5579066873461596078 stripped

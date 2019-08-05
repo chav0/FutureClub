@@ -5293,56 +5293,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: TimeToSpawn
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[2]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[3]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[4]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[5]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[6]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[7]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[8]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
-        type: 3}
-      propertyPath: SpawnPerDay.Array.data[9]
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd9c0684699a17418a42a16aeef004c, type: 3}
 --- !u!114 &7635513651861625620 stripped
@@ -5483,41 +5433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288457362905052609, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288457362905052609, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9185185132332612713, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9185185132332612713, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9185185132332612713, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5947300815002871884, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5947300815002871884, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 408dc2b49b1d0dc4bbe6a649d09af325, type: 3}
