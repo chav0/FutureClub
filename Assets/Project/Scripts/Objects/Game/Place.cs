@@ -140,7 +140,8 @@ namespace Project.Scripts.Objects.Game
 
         public void SetTower()
         {
-            ReturnCost = Tower.Cost / 2;
+            //ReturnCost = Tower.Cost / 2;
+            ReturnCost = Tower.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Tower; 
             _buyButtons.SetActive(false);
@@ -150,7 +151,8 @@ namespace Project.Scripts.Objects.Game
 
         public void SetFence()
         {
-            ReturnCost = Fence.Cost / 2;
+            //ReturnCost = Fence.Cost / 2;
+            ReturnCost = Fence.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Fence; 
             _buyButtons.SetActive(false);
@@ -160,7 +162,8 @@ namespace Project.Scripts.Objects.Game
 
         public void SetRidge()
         {
-            ReturnCost = Ridge.Cost / 2;
+            //ReturnCost = Ridge.Cost / 2;
+            ReturnCost = Ridge.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Ridge; 
             _buyButtons.SetActive(false);
