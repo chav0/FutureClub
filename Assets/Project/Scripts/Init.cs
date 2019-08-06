@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using Project.Scripts.Models;
 using Project.Scripts.Objects;
 using Project.Scripts.Objects.Game;
@@ -16,11 +17,12 @@ namespace Project.Scripts
         public Screens Screens;
         public Player Player;
         public Level Level;
-        public Settings Settings; 
+        public Settings Settings;
+        public House House;
         
         public void Start()
         {
-            IGameplayView gameplayView = new GamePlayView(Player, Level, Settings);
+            IGameplayView gameplayView = new GamePlayView(Player, Level, Settings, House);
             IApplicationModel model = new ApplicationModel();
             IUserInterfaceView uiView = new UserInterfaceView(Screens, Settings);
             _presenter = new ApplicationPresenter(gameplayView, uiView, model);

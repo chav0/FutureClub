@@ -40,7 +40,7 @@ namespace Project.Scripts.Objects.Game
             _healthBar.gameObject.SetActive(Health.CurrentHealth  != Health.MaxHealth);
             _healthBar.value = Health.CurrentHealth / (float) Health.MaxHealth;
 
-            if (Time.time - _timer > _growTime / 2f && State == RidgeState.First)
+            if (State == RidgeState.First)
             {
                 State = RidgeState.Second;
                 ChangeState(); 

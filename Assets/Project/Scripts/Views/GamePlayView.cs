@@ -15,7 +15,8 @@ namespace Project.Scripts.Views
         private Player _player;
         private List<Enemy> _enemies; 
         private Level _level;
-        private Settings _settings; 
+        private Settings _settings;
+        private House _house;
         
         public bool IsGameOver { get; private set; }
         public int Coins { get; private set; }
@@ -25,11 +26,12 @@ namespace Project.Scripts.Views
 
         private readonly int _ticksPerDay; 
         
-        public GamePlayView(Player player, Level level, Settings settings)
+        public GamePlayView(Player player, Level level, Settings settings, House house)
         {
             _player = player;
             _level = level;
             _settings = settings;
+            _house = house;
 
             foreach (var portal in _level.Portals)
             {
@@ -54,6 +56,27 @@ namespace Project.Scripts.Views
                         Food--; 
                     }
                 }
+
+                ////----
+                if (_house.Sell.TryGet(out var foodMinus))
+                {
+                    if (Food >= _house._foodForSellCount)
+                    {
+                        Food -= foodMinus;
+                        Coins += _house._foodCost;
+                    }
+                }
+                
+                if (_house.HauseUp.TryGet(out var coinsMinus))
+                {
+                    if (Coins >= _house._houseUpCost)
+                    {
+                        Coins -= coinsMinus;
+                        _house.HouseSprite.sprite = _house.GoodHouseSprite;
+                        //ДОБАВИТЬ ПЕРЕХОД К ПРАЗДНОВАНИЮ ПОБЕДЫ
+                    }
+                }
+                ////----
 
                 for (var i = 0; i < _level.Coins.Count; i++)
                 {
