@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 31b9453b8aceb864f9f3d19ceb54e242, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bca4630ffd590b4e9c2ab24943ce1bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -147,7 +147,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8648917251663932712}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -41.7, y: -3.1, z: 0}
   m_LocalScale: {x: 10.2805, y: 10.2805, z: 10.2805}
   m_Children:
@@ -248,7 +248,7 @@ MonoBehaviour:
   SellButton: {fileID: 8648917251319034385}
   HauseUpButton: {fileID: 8648917252487651000}
   _foodForSellCount: 5
-  _houseUpCost: 100
+  _houseUpCost: 15
   _foodCost: 5
   HouseSprite: {fileID: 8648917251663932719}
   GoodHouseSprite: {fileID: 21300000, guid: 66b34e566289f7b46b8f37b82a297891, type: 3}
@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: da7e33f4f9acc7a40a5747739ff5624c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bca4630ffd590b4e9c2ab24943ce1bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -579,7 +579,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, Unity.ugui,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8750f052454f2e44baf37dbf95ac5cf3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59e854ea65923b246909319579772388, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

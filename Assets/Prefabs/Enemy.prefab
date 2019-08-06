@@ -1317,7 +1317,7 @@ MonoBehaviour:
   DamageDelay: 2
   Damage: 2
   CoinProbability: 0
-  SeedsProbability: 0.7
+  SeedsProbability: 1
 --- !u!70 &8295218320975093140
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

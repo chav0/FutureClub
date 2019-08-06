@@ -223,7 +223,7 @@ MonoBehaviour:
   Player: {fileID: 852706138}
   Level: {fileID: 1473708276}
   Settings:
-    DayDuration: 120
+    DayDuration: 60
     DayColors:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
