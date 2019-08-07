@@ -407,12 +407,12 @@ MonoBehaviour:
   _animator: {fileID: 9185185130761837869}
   _healthBar: {fileID: 0}
   _canvas: {fileID: 8642660293826992958}
-  _energy: 100
+  _energy: 300
   _energySlider: {fileID: 0}
   _spendEnergyPerTick: 0.1
   _spendEnergyForBuilding: 10
   _hpFromFood: 2
-  _energyFromFood: 50
+  _energyFromFood: 150
   _eatButton: {fileID: 0}
 --- !u!95 &9185185130761837869
 Animator:

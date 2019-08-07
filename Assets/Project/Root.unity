@@ -8422,46 +8422,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1840299332}
-    - target: {fileID: 8648917253097691712, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917253097691712, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917253097691712, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917253097691712, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917252501447985, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917252501447985, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917252501447985, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648917252501447985, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe4ff76e754aa84ab6e522bc30ecf68, type: 3}
 --- !u!1001 &9185185131001880181
@@ -8500,6 +8460,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _energy
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185185130761837871, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
+        type: 3}
+      propertyPath: _energyFromFood
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 9185185130761837868, guid: 408dc2b49b1d0dc4bbe6a649d09af325,
         type: 3}
