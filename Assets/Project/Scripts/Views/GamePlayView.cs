@@ -18,6 +18,8 @@ namespace Project.Scripts.Views
         private Settings _settings;
         private House _house;
         
+        private int dayListNum = 0;
+        
         public bool IsGameOver { get; private set; }
         public int Coins { get; private set; }
         public int Seeds { get; private set; }
@@ -37,7 +39,6 @@ namespace Project.Scripts.Views
             {
                 portal.TickSpawn = (int) Math.Truncate(portal.TimeToSpawn * _settings.DayDuration / Time.fixedDeltaTime);
             }
-
             _ticksPerDay = (int) Math.Truncate(settings.DayDuration / Time.fixedDeltaTime); 
             _enemies = new List<Enemy>();
         }
@@ -279,9 +280,10 @@ namespace Project.Scripts.Views
 
                 foreach (var portal in _level.Portals)
                 {
-                    if (portal.TickSpawn == tickOfDay)
+                    if ((tickOfDay > 0) && (tickOfDay % portal.TickSpawn == 0))
                     {
-                        var enemies = portal.Spawn(day);
+                        var enemies = portal.Spawn(dayListNum);
+                        dayListNum++;
                         _enemies.AddRange(enemies);
                     }
                 }

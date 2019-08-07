@@ -120,11 +120,11 @@ namespace Project.Scripts.Objects.Game
             switch (State)
             {
                 case PlaceState.Tower:
-                    return (int) Math.Ceiling(Tower.Cost * (1 - Tower.Health.CurrentHealth / (float) Tower.Health.MaxHealth));
+                    return (int) Math.Ceiling(Tower.Cost * 0.5f);
                 case PlaceState.Fence:
-                    return (int) Math.Ceiling(Fence.Cost * (1 - Fence.Health.CurrentHealth / (float) Fence.Health.MaxHealth));
+                    return (int) Math.Ceiling(Fence.Cost * 0.5f);
                 case PlaceState.Ridge:
-                    return (int) Math.Ceiling(Ridge.Cost * (1 - Ridge.Health.CurrentHealth / (float) Ridge.Health.MaxHealth));
+                    return (int) Math.Ceiling(Ridge.Cost * 0.5f);
                 default:
                     return 0; 
             }
