@@ -13,6 +13,7 @@ namespace Project.Scripts.Objects.Game
         [SerializeField] private int _health; 
         [SerializeField] private int _cost; 
         [SerializeField] private Slider _healthBar;
+        [SerializeField] private SpriteRenderer _sprite;
 
         public Health Health;
         public int Cost => _cost;
@@ -25,7 +26,7 @@ namespace Project.Scripts.Objects.Game
 
         private void OnEnable()
         {
-            Health = new Health(_health);
+            Health = new Health(_health, null, _sprite);
         }
 
         private void OnDisable()

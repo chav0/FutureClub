@@ -15,6 +15,7 @@ namespace Project.Scripts.Objects.Game.Character
         [SerializeField] private int _hpFromFood;
         [SerializeField] private int _energyFromFood;
         [SerializeField] private Button _eatButton;
+        [SerializeField] private GameObject _noEnergyPopup; 
 
         public UIMessage EatFood = new UIMessage();
         public Energy Energy { get; set; }
@@ -72,11 +73,15 @@ namespace Project.Scripts.Objects.Game.Character
             {
                 if (Energy.CurrentEnergy > 0f)
                 {
-                    Energy.SpendEnergy(_spendEnergyPerTick * (multiplier - 1f));
+                    Energy.SpendEnergy(_spendEnergyPerTick * (multiplier - 1f) * Time.deltaTime);
                 }
                 else
                 {
-                    multiplier = 1f; 
+                    if (multiplier > 1f)
+                    {
+                        multiplier = 1f;
+                        ShowLowEnergy();
+                    } 
                 }
             }
             
@@ -90,7 +95,7 @@ namespace Project.Scripts.Objects.Game.Character
 
         public void Eat()
         {
-            if (Math.Abs(Energy.CurrentEnergy - Energy.MaxEnergy) < Mathf.Epsilon)
+            if (Math.Abs(Energy.CurrentEnergy - Energy.MaxEnergy) < 0.8f)
             {
                 Health.Heal(_hpFromFood);
             }
@@ -98,6 +103,11 @@ namespace Project.Scripts.Objects.Game.Character
             {
                 Energy.AddEnergy(_energyFromFood); 
             }
+        }
+
+        public void ShowLowEnergy()
+        {
+            _noEnergyPopup.SetActive(true);
         }
     }
 }

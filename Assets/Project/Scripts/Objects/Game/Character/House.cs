@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Views.UserInput;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class House : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _foodForSellUICount;
     [SerializeField] private TextMeshProUGUI _houseUpUICost;
+    [SerializeField] private int _health;
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private SpriteRenderer _sprite;
     
     public GameObject Canvas;
     
     public Button SellButton;
     public Button HauseUpButton;
+    public Health Health;
     
     public UIMessage<int> Sell = new UIMessage<int>();
-    public UIMessage<int> HauseUp = new UIMessage<int>();
+    public UIMessage<int> HouseUp = new UIMessage<int>();
     
     public int _foodForSellCount;
     public int _houseUpCost;
@@ -44,6 +50,7 @@ public class House : MonoBehaviour
     {
         _foodForSellUICount.text = _foodForSellCount.ToString();
         _houseUpUICost.text = _houseUpCost.ToString(); 
+        Health = new Health(_health, null, _sprite);
         
         SellButton.onClick.AddListener(() =>
         {
@@ -52,7 +59,15 @@ public class House : MonoBehaviour
             
         HauseUpButton.onClick.AddListener(() =>
         {
-            HauseUp.Set(_houseUpCost);
+            HouseUp.Set(_houseUpCost);
         });
+    }
+    
+    private void Update()
+    {
+        if (_healthBar != null)
+        {
+            _healthBar.value = Health.CurrentHealth / (float) Health.MaxHealth; 
+        }
     }
 }

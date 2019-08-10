@@ -74,6 +74,7 @@ MonoBehaviour:
   _health: 36
   _cost: 1
   _healthBar: {fileID: 0}
+  _sprite: {fileID: 8904741341218199125}
 --- !u!1 &5268958941943183724
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +120,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

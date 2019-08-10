@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Anima2D;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Scripts.Objects.Game.Character
@@ -10,10 +12,11 @@ namespace Project.Scripts.Objects.Game.Character
         [SerializeField] private Animator _animator;
         [SerializeField] private Image _healthBar; 
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private List<SpriteMeshInstance> _spriteRenderers; 
 
         public void Awake()
         {
-            Health = new Health(_health);
+            Health = new Health(_health, _spriteRenderers);
             Transform = new CTransform(transform, _speed, _animator, _canvas);
         }
 

@@ -15,6 +15,7 @@ namespace Project.Scripts.Objects.Game
         [SerializeField] private Slider _healthBar;
         [SerializeField] private float _delay;
         [SerializeField] private Vector3 _pointPotatoSpawn;
+        [SerializeField] private SpriteRenderer _sprite;
 
         public float Range; 
 
@@ -32,7 +33,7 @@ namespace Project.Scripts.Objects.Game
 
         private void OnEnable()
         {
-            Health = new Health(_health);
+            Health = new Health(_health, null, _sprite);
         }
 
         private void OnDisable()

@@ -16,6 +16,7 @@ namespace Project.Scripts.Objects.Game
         [SerializeField] private float _growTime;
         [SerializeField] private GameObject _firstState;
         [SerializeField] private GameObject _readyState;
+        [SerializeField] private SpriteRenderer _sprite;
 
         private float _timer; 
         
@@ -61,7 +62,7 @@ namespace Project.Scripts.Objects.Game
 
         private void OnEnable()
         {
-            Health = new Health(_health);
+            Health = new Health(_health, null, _sprite);
         }
 
         private void OnDisable()

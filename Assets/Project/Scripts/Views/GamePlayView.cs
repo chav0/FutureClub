@@ -12,9 +12,9 @@ namespace Project.Scripts.Views
 {
     public class GamePlayView : IGameplayView
     {
-        private Player _player;
-        private List<Enemy> _enemies; 
-        private Level _level;
+        public Player Player { get; private set; }
+        public List<Enemy> Enemies { get; private set; }
+        public Level Level { get; private set; }
         private Settings _settings;
         private House _house;
         
@@ -30,30 +30,30 @@ namespace Project.Scripts.Views
         
         public GamePlayView(Player player, Level level, Settings settings, House house)
         {
-            _player = player;
-            _level = level;
+            Player = player;
+            Level = level;
             _settings = settings;
             _house = house;
 
-            foreach (var portal in _level.Portals)
+            foreach (var portal in Level.Portals)
             {
                 portal.TickSpawn = (int) Math.Truncate(portal.TimeToSpawn * _settings.DayDuration / Time.fixedDeltaTime);
             }
             _ticksPerDay = (int) Math.Truncate(settings.DayDuration / Time.fixedDeltaTime); 
-            _enemies = new List<Enemy>();
+            Enemies = new List<Enemy>();
         }
         
         public void Update(ApplicationState state)
         {
             if (state == ApplicationState.Game)
             {
-                IsGameOver = _player.Health.IsDead;
+                IsGameOver = Player.Health.IsDead;
 
-                if (_player.EatFood.TryGet())
+                if (Player.EatFood.TryGet())
                 {
                     if (Food > 0)
                     {
-                        _player.Eat();
+                        Player.Eat();
                         Food--; 
                     }
                 }
@@ -68,7 +68,7 @@ namespace Project.Scripts.Views
                     }
                 }
                 
-                if (_house.HauseUp.TryGet(out var coinsMinus))
+                if (_house.HouseUp.TryGet(out var coinsMinus))
                 {
                     if (Coins >= _house._houseUpCost)
                     {
@@ -79,69 +79,81 @@ namespace Project.Scripts.Views
                 }
                 ////----
 
-                for (var i = 0; i < _level.Coins.Count; i++)
+                for (var i = 0; i < Level.Coins.Count; i++)
                 {
-                    var coin = _level.Coins[i];
+                    var coin = Level.Coins[i];
 
                     if (coin.IsCollisionEnter)
                     {
                         Coins += coin.Value;
-                        _level.Coins.RemoveAt(i);
+                        Level.Coins.RemoveAt(i);
                         coin.Realise();
                     }
                 }
                 
-                for (var i = 0; i < _level.Seeds.Count; i++)
+                for (var i = 0; i < Level.Seeds.Count; i++)
                 {
-                    var seeds = _level.Seeds[i];
+                    var seeds = Level.Seeds[i];
 
                     if (seeds.IsCollisionEnter)
                     {
                         Seeds += seeds.Value;
-                        _level.Seeds.RemoveAt(i);
+                        Level.Seeds.RemoveAt(i);
                         seeds.Realise();
                     }
                 }
 
-                for (int i = _level.Places.Count - 1; i >= 0; i--)
+                for (int i = Level.Places.Count - 1; i >= 0; i--)
                 {
-                    var place = _level.Places[i];
+                    var place = Level.Places[i];
 
                     if (place.Destroy.TryGet())
                     {
                         Coins += place.ReturnCost;
-                        _player.Build(); 
+                        Player.Build(); 
                     }
 
                     if (place.State == PlaceState.Empty)
                     {
                         if (place.BuyTower.TryGet(out var coins))
                         {
-                            if (Coins >= coins && _player.Energy.CurrentEnergy >= _player._spendEnergyForBuilding)
+                            if (Coins >= coins && Player.Energy.CurrentEnergy >= Player._spendEnergyForBuilding)
                             {
                                 Coins -= coins;
                                 place.SetTower();
-                                _player.Build(); 
+                                Player.Build(); 
+                            }
+                            else if (Player.Energy.CurrentEnergy < Player._spendEnergyForBuilding)
+                            {
+                                Player.ShowLowEnergy();
                             }
                         }
                         
                         if (place.BuyFence.TryGet(out coins))
                         {
-                            if (Coins >= coins && _player.Energy.CurrentEnergy >= _player._spendEnergyForBuilding)
+                            if (Coins >= coins && Player.Energy.CurrentEnergy >= Player._spendEnergyForBuilding)
                             {
                                 place.SetFence();
                                 Coins -= coins;
-                                _player.Build(); 
+                                Player.Build(); 
+                            }
+                            else if (Player.Energy.CurrentEnergy < Player._spendEnergyForBuilding)
+                            {
+                                Player.ShowLowEnergy();
                             }
                         }
                         
                         if (place.BuyRidge.TryGet(out coins))
                         {
-                            if (Coins >= coins && _player.Energy.CurrentEnergy >= _player._spendEnergyForBuilding)
+                            if (Coins >= coins && Player.Energy.CurrentEnergy >= Player._spendEnergyForBuilding)
                             {
                                 place.SetRidge();
                                 Coins -= coins;
-                                _player.Build(); 
+                                Player.Build(); 
+                            }
+                            else if (Player.Energy.CurrentEnergy < Player._spendEnergyForBuilding)
+                            {
+                                Player.ShowLowEnergy();
                             }
                         }
                     }
@@ -157,7 +169,7 @@ namespace Project.Scripts.Views
                         var nearestRange = place.Tower.Range;
                         var attack = false; 
                         
-                        foreach (var enemy in _enemies)
+                        foreach (var enemy in Enemies)
                         {
                             var distance = Math.Abs(enemy.Transform.Position.x - place.Tower.transform.position.x);
                             
@@ -207,7 +219,7 @@ namespace Project.Scripts.Views
 
                     if (place.Repair.TryGet(out var cost, out var building))
                     {
-                        if (Coins >= cost && _player.Energy.CurrentEnergy >= _player._spendEnergyForBuilding)
+                        if (Coins >= cost && Player.Energy.CurrentEnergy >= Player._spendEnergyForBuilding)
                         {
                             Coins -= cost;
                             switch (building)
@@ -222,26 +234,30 @@ namespace Project.Scripts.Views
                                     place.Ridge.Health.RestoreHealth();
                                     break;
                             }
-                            _player.Build(); 
-                        } 
+                            Player.Build(); 
+                        }
+                        else if (Player.Energy.CurrentEnergy < Player._spendEnergyForBuilding)
+                        {
+                            Player.ShowLowEnergy();
+                        }
                     }
                 }
 
-                for (int i = _enemies.Count - 1; i >= 0; i--)
+                for (int i = Enemies.Count - 1; i >= 0; i--)
                 {
-                    var enemy = _enemies[i];
+                    var enemy = Enemies[i];
 
                     if (enemy.Health.IsDead && !enemy.IsDead)
                     {
                         enemy.Death();
                         RandomEnemyLoot(enemy); 
-                        _enemies.RemoveAt(i);
+                        Enemies.RemoveAt(i);
                         continue;
                     }
                     
                     if(!enemy.IsAttack)
                     {
-                        var direction = enemy.Transform.Transform.position.x - _level.transform.position.x > 0
+                        var direction = enemy.Transform.Transform.position.x - Level.MainBuilding.position.x > 0
                             ? Direction.Left
                             : Direction.Right; 
                         enemy.Transform.Move(direction);
@@ -256,18 +272,18 @@ namespace Project.Scripts.Views
 
             if (random < enemy.CoinProbability)
             {
-                var coin = Object.Instantiate(_level.CoinPrefab);
+                var coin = Object.Instantiate(Level.CoinPrefab);
                 coin.transform.position = enemy.transform.position + new Vector3(Random.value * 10f, 0f, 0f); 
-                _level.Coins.Add(coin);
+                Level.Coins.Add(coin);
             }
 
             random = Random.value;
 
             if (random < enemy.SeedsProbability)
             {
-                var seeds = Object.Instantiate(_level.SeedsPrefab);
+                var seeds = Object.Instantiate(Level.SeedsPrefab);
                 seeds.transform.position = enemy.transform.position + new Vector3(Random.value * 10f, 0f, 0f); 
-                _level.Seeds.Add(seeds);
+                Level.Seeds.Add(seeds);
             }
         }
 
@@ -278,13 +294,13 @@ namespace Project.Scripts.Views
                 var day = (int) Math.Truncate(TimeHelper.CurrentTick / (float) _ticksPerDay);
                 var tickOfDay = TimeHelper.CurrentTick % _ticksPerDay;
 
-                foreach (var portal in _level.Portals)
+                foreach (var portal in Level.Portals)
                 {
                     if ((tickOfDay > 0) && (tickOfDay % portal.TickSpawn == 0))
                     {
                         var enemies = portal.Spawn(dayListNum);
                         dayListNum++;
-                        _enemies.AddRange(enemies);
+                        Enemies.AddRange(enemies);
                     }
                 }
             }
@@ -292,8 +308,8 @@ namespace Project.Scripts.Views
 
         public void SetDirectionOfPress(Direction direction, float multiplier)
         {
-            _player.Move(direction, multiplier);
-            _level.Move(_player.Transform.Position);
+            Player.Move(direction, multiplier);
+            Level.Move(Player.Transform.Position);
         }
 
         public void ResetWorld()

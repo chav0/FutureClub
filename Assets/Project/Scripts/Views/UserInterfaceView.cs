@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Project.Scripts.Objects;
+using Project.Scripts.Objects.Game;
+using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Objects.UI;
 using Project.Scripts.Presenters;
 using Project.Scripts.Views.UserInput;
@@ -22,7 +25,7 @@ namespace Project.Scripts.Views
         public UIMessage<int> IsRightPressed => _rightClick;
         public bool IsPausePressed => _pause.TryGet();
         public bool NewGame => _newGame.TryGet();
-        public bool IsContinuePressed => _continue.TryGet(); 
+        public bool IsContinuePressed => _continue.TryGet();
 
         public UserInterfaceView(Screens screens, Settings settings)
         {
@@ -31,7 +34,18 @@ namespace Project.Scripts.Views
 
             _screens.Pause.Continue.onClick.AddListener(_continue.Set);
         }
+        
+        public void Init(Level level)
+        {
+            _screens.HUD.Indicators.Init(level.MainBuilding, level.Portals.Select(x => x.transform).ToList(), level.Places.Select(x => x.transform).ToList());
+        }
 
+        public void Update(Level level, Player player, List<Enemy> enemies)
+        {
+            _screens.HUD.Indicators.UpdatePlayerPosition(player.Transform);
+            _screens.HUD.Indicators.UpdatePlaces(level.Places);
+            _screens.HUD.Indicators.UpdateEnemies(enemies);
+        }
 
         public void Update(int coins, int seeds, int food, int score, int level, ApplicationState state)
         {

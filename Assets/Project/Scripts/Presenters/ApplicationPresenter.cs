@@ -18,6 +18,8 @@ namespace Project.Scripts.Presenters
             _interfaceView = interfaceView;
             _model = model;
             _state = ApplicationState.Game; 
+            
+            _interfaceView.Init(_gameplayView.Level);
         }
         
         public void Update()
@@ -25,7 +27,8 @@ namespace Project.Scripts.Presenters
             _gameplayView.Update(_state);
             _model.Update();
             _model.Coins = _gameplayView.Coins; 
-            _interfaceView.Update( _model.Coins, _gameplayView.Seeds, _gameplayView.Food, 0, 1, _state);
+            _interfaceView.Update(_model.Coins, _gameplayView.Seeds, _gameplayView.Food, 0, 1, _state);
+            _interfaceView.Update(_gameplayView.Level, _gameplayView.Player, _gameplayView.Enemies);
 
             if (_state == ApplicationState.Game)
             {
@@ -45,12 +48,6 @@ namespace Project.Scripts.Presenters
                 else
                 {
                     _gameplayView.SetDirectionOfPress(Direction.None, 0);
-                    if (_interfaceView.IsPausePressed)
-                    {
-                        _interfaceView.ShowPause();
-                        _gameplayView.SetPause(true);
-                        _state = ApplicationState.Pause;
-                    }
                 }
             } 
             else if (_state == ApplicationState.Results)
@@ -62,15 +59,6 @@ namespace Project.Scripts.Presenters
                 if (_interfaceView.NewGame)
                 {
                     _interfaceView.ShowNewGame();
-                    _state = ApplicationState.Game; 
-                }
-            }
-            else if (_state == ApplicationState.Pause)
-            {
-                if (_interfaceView.IsContinuePressed)
-                {
-                    _interfaceView.ShowNewGame();
-                    _gameplayView.SetPause(false);
                     _state = ApplicationState.Game; 
                 }
             }
@@ -88,7 +76,5 @@ namespace Project.Scripts.Presenters
         Game,
         Menu,
         Results,
-        Pause,
-        CharSelect
     }
 }

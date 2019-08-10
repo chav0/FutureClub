@@ -8,6 +8,7 @@ namespace Project.Scripts.Objects.UI
     {
         public TextMeshProUGUI Coins; 
         public TextMeshProUGUI Seeds; 
-        public TextMeshProUGUI Foods; 
+        public TextMeshProUGUI Foods;
+        public Indicators Indicators; 
     }
 }

@@ -46,6 +46,11 @@ namespace Project.Scripts.Objects.Game.Character
             if (ridge != null)
                 _triggeredHealths.Add(ridge.Health);
             
+            var house = col.gameObject.GetComponent<House>();
+
+            if (house != null)
+                _triggeredHealths.Add(house.Health);
+            
             var potato = col.gameObject.GetComponent<Potato>();
 
             if (potato != null && !potato.IsCollisionEnemy)
@@ -76,6 +81,12 @@ namespace Project.Scripts.Objects.Game.Character
 
             if (ridge != null)
                 _triggeredHealths.Remove(ridge.Health);
+            
+                        
+            var house = col.gameObject.GetComponent<House>();
+
+            if (house != null)
+                _triggeredHealths.Remove(house.Health);
         }
 
         private void Attack()
