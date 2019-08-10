@@ -18,10 +18,7 @@ namespace Project.Scripts.Views
         void Update(Level level, Player player, List<Enemy> enemies); 
         void Update(int coins, int seeds, int food, int score, int level, ApplicationState state);
 
-        void ShowGameOver();
-        void ShowNewGame();
-        void ShowMainMenu();
-        void ShowCharSelect();
-        void ShowPause(); 
+        void ShowVictory();
+        void ShowDefeat(); 
     }
 }

@@ -32,7 +32,11 @@ namespace Project.Scripts.Views
             _screens = screens;
             _settings = settings; 
 
-            _screens.Pause.Continue.onClick.AddListener(_continue.Set);
+            _screens.Continue.onClick.AddListener(() =>
+            {
+                _continue.Set();
+                _screens.Victory.gameObject.SetActive(false);
+            });
         }
         
         public void Init(Level level)
@@ -52,7 +56,7 @@ namespace Project.Scripts.Views
             _screens.HUD.Coins.text = coins.ToString();
             _screens.HUD.Seeds.text = seeds.ToString(); 
             _screens.HUD.Foods.text = food.ToString(); 
-            _screens.DayColor.color = _settings.DayColors.Evaluate((Time.time % _settings.DayDuration) / _settings.DayDuration); 
+            _screens.DayColor.color = _settings.DayColors.Evaluate((Time.timeSinceLevelLoad % _settings.DayDuration) / _settings.DayDuration); 
             
             if(_screens.InputField.Left.IsWalking)
                 _leftClick.Set(1);
@@ -67,39 +71,14 @@ namespace Project.Scripts.Views
                 _rightClick.Set(2);
         }
 
-        public void ShowGameOver()
+        public void ShowVictory()
         {
-            _screens.HUD.gameObject.SetActive(false);
-            _screens.InputField.gameObject.SetActive(false);
-            _screens.Pause.gameObject.SetActive(false);
+            _screens.Victory.SetActive(true);
         }
 
-        public void ShowNewGame()
+        public void ShowDefeat()
         {
-            _screens.HUD.gameObject.SetActive(true);
-            _screens.InputField.gameObject.SetActive(true);
-            _screens.Pause.gameObject.SetActive(false);
-        }
-
-        public void ShowMainMenu()
-        {
-            _screens.HUD.gameObject.SetActive(false);
-            _screens.InputField.gameObject.SetActive(false);
-            _screens.Pause.gameObject.SetActive(false);
-        }
-
-        public void ShowCharSelect()
-        {
-            _screens.HUD.gameObject.SetActive(false);
-            _screens.InputField.gameObject.SetActive(false);
-            _screens.Pause.gameObject.SetActive(false);
-        }
-
-        public void ShowPause()
-        {
-            _screens.HUD.gameObject.SetActive(false);
-            _screens.InputField.gameObject.SetActive(false);
-            _screens.Pause.gameObject.SetActive(true);
+            _screens.Defeat.SetActive(true);
         }
     }
 }

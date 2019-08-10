@@ -13,14 +13,14 @@ namespace Project.Scripts.Objects.UI
         public GameObject Defeat;
         public Image DayColor;
 
-        [SerializeField] private Button Continue;
+        public Button Continue;
         [SerializeField] private Button Reload1;
         [SerializeField] private Button Reload2; 
 
         private void Awake()
         {
-            Continue.onClick.AddListener(() => Time.timeScale = 1f);
             Reload1.onClick.AddListener(() => SceneManager.LoadScene(0));
+            Reload2.onClick.AddListener(() => SceneManager.LoadScene(0));
         }
     }
 }

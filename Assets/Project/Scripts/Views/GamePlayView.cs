@@ -21,6 +21,7 @@ namespace Project.Scripts.Views
         private int dayListNum = 0;
         
         public bool IsGameOver { get; private set; }
+        public bool IsVictory { get; private set; }
         public int Coins { get; private set; }
         public int Seeds { get; private set; }
         public int Food { get; private set; }
@@ -45,9 +46,9 @@ namespace Project.Scripts.Views
         
         public void Update(ApplicationState state)
         {
-            if (state == ApplicationState.Game)
+            if (state == ApplicationState.Game || state == ApplicationState.UnlimitedGame)
             {
-                IsGameOver = Player.Health.IsDead;
+                IsGameOver = Player.Health.IsDead || _house.Health.IsDead;
 
                 if (Player.EatFood.TryGet())
                 {
@@ -58,7 +59,6 @@ namespace Project.Scripts.Views
                     }
                 }
 
-                ////----
                 if (_house.Sell.TryGet(out var foodMinus))
                 {
                     if (Food >= _house._foodForSellCount)
@@ -74,10 +74,9 @@ namespace Project.Scripts.Views
                     {
                         Coins -= coinsMinus;
                         _house.HouseSprite.sprite = _house.GoodHouseSprite;
-                        //ДОБАВИТЬ ПЕРЕХОД К ПРАЗДНОВАНИЮ ПОБЕДЫ
+                        IsVictory = true; 
                     }
                 }
-                ////----
 
                 for (var i = 0; i < Level.Coins.Count; i++)
                 {
@@ -289,7 +288,7 @@ namespace Project.Scripts.Views
 
         public void FixedUpdate(ApplicationState state)
         {
-            if (state == ApplicationState.Game)
+            if (state == ApplicationState.Game || state == ApplicationState.UnlimitedGame)
             {
                 var day = (int) Math.Truncate(TimeHelper.CurrentTick / (float) _ticksPerDay);
                 var tickOfDay = TimeHelper.CurrentTick % _ticksPerDay;

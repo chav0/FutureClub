@@ -373,7 +373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2939692502371448215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1160,7 +1160,12 @@ MonoBehaviour:
   HUD: {fileID: 4840786433871954031}
   InputField: {fileID: 4840786433487805803}
   Pause: {fileID: 4840786433994360567}
+  Victory: {fileID: 2398609754731440328}
+  Defeat: {fileID: 9193196351568875905}
   DayColor: {fileID: 4840786434348309644}
+  Continue: {fileID: 3763475934301953571}
+  Reload1: {fileID: 1917310831545622307}
+  Reload2: {fileID: 6391915061617480686}
 --- !u!1 &4840786433730758364
 GameObject:
   m_ObjectHideFlags: 0

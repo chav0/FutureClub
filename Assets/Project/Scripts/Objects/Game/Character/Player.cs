@@ -43,13 +43,11 @@ namespace Project.Scripts.Objects.Game.Character
             
             if(seeds != null)
                 seeds.IsCollisionEnter = true;
-            
-            ////----
+
             var house = col.gameObject.GetComponent<House>();
             
             if(house != null)
                 house.IsCollisionEnter = true;
-            ////----
         }
 
         private void OnTriggerExit2D(Collider2D col)
@@ -58,13 +56,11 @@ namespace Project.Scripts.Objects.Game.Character
             
             if(tower != null)
                 tower.IsCollisionEnter = false;
-            
-            ////----
+
             var house = col.gameObject.GetComponent<House>();
             
             if(house != null)
                 house.IsCollisionEnter = false;
-            ////----
         }
 
         public void Move(Direction direction, float multiplier = 1f)

@@ -11,6 +11,7 @@ namespace Project.Scripts.Views
         List<Enemy> Enemies { get; }
         Level Level { get; }
         bool IsGameOver { get; }
+        bool IsVictory { get; }
         int Coins { get; }
         int Seeds { get; }
         int Food { get; }

@@ -1,6 +1,7 @@
 using Project.Scripts.Models;
 using Project.Scripts.Objects.Game.Character;
 using Project.Scripts.Views;
+using UnityEngine;
 
 namespace Project.Scripts.Presenters
 {
@@ -30,13 +31,21 @@ namespace Project.Scripts.Presenters
             _interfaceView.Update(_model.Coins, _gameplayView.Seeds, _gameplayView.Food, 0, 1, _state);
             _interfaceView.Update(_gameplayView.Level, _gameplayView.Player, _gameplayView.Enemies);
 
-            if (_state == ApplicationState.Game)
+            if (_interfaceView.IsContinuePressed)
+                _state = ApplicationState.UnlimitedGame; 
+            
+            if (_state == ApplicationState.Game || _state == ApplicationState.UnlimitedGame)
             {
-                if (_gameplayView.IsGameOver)
+                Time.timeScale = 1f; 
+                if (_gameplayView.IsVictory && _state == ApplicationState.Game)
                 {
-                    _interfaceView.ShowGameOver();
                     _state = ApplicationState.Results; 
-                }                
+                    _interfaceView.ShowVictory();
+                }else if (_gameplayView.IsGameOver)
+                {
+                    _state = ApplicationState.Results; 
+                    _interfaceView.ShowDefeat();
+                }
                 else if (_interfaceView.IsLeftPressed.TryGet(out var multiplier))
                 {
                     _gameplayView.SetDirectionOfPress(Direction.Left, multiplier);
@@ -52,15 +61,7 @@ namespace Project.Scripts.Presenters
             } 
             else if (_state == ApplicationState.Results)
             {
-                
-            }
-            else if (_state == ApplicationState.Menu)
-            {
-                if (_interfaceView.NewGame)
-                {
-                    _interfaceView.ShowNewGame();
-                    _state = ApplicationState.Game; 
-                }
+                Time.timeScale = 0f; 
             }
         }
 
@@ -74,6 +75,7 @@ namespace Project.Scripts.Presenters
     public enum ApplicationState
     {
         Game,
+        UnlimitedGame,
         Menu,
         Results,
     }
