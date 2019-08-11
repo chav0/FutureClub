@@ -7192,6 +7192,11 @@ PrefabInstance:
       propertyPath: SpawnPerDay.Array.data[14]
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7635513651861625620, guid: 6fd9c0684699a17418a42a16aeef004c,
+        type: 3}
+      propertyPath: TimeToSpawn
+      value: 0.235
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd9c0684699a17418a42a16aeef004c, type: 3}
 --- !u!114 &7635513651861625620 stripped
@@ -7271,7 +7276,7 @@ PrefabInstance:
     - target: {fileID: 8648917251663932717, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
         type: 3}
       propertyPath: _houseUpCost
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8648917251663932712, guid: 9fe4ff76e754aa84ab6e522bc30ecf68,
         type: 3}

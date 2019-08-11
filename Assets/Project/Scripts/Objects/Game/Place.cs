@@ -17,6 +17,7 @@ namespace Project.Scripts.Objects.Game
         [SerializeField] private TextMeshProUGUI _ridgeCost;
         [SerializeField] private TextMeshProUGUI _returnCost; 
         [SerializeField] private TextMeshProUGUI _repairCost; 
+        [SerializeField] private AudioSource _destroySound; 
         [SerializeField] private GameObject _empty; 
         public GameObject Canvas; 
         public Button TowerButton;
@@ -135,12 +136,12 @@ namespace Project.Scripts.Objects.Game
             State = PlaceState.Empty; 
             _buyButtons.SetActive(true);
             _buttonsActive.SetActive(false);
+            _destroySound.Play();
             SetState(); 
         }
 
         public void SetTower()
         {
-            //ReturnCost = Tower.Cost / 2;
             ReturnCost = Tower.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Tower; 
@@ -151,7 +152,6 @@ namespace Project.Scripts.Objects.Game
 
         public void SetFence()
         {
-            //ReturnCost = Fence.Cost / 2;
             ReturnCost = Fence.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Fence; 
@@ -162,7 +162,6 @@ namespace Project.Scripts.Objects.Game
 
         public void SetRidge()
         {
-            //ReturnCost = Ridge.Cost / 2;
             ReturnCost = Ridge.Cost;
             _returnCost.text = "+ " + ReturnCost; 
             State = PlaceState.Ridge; 

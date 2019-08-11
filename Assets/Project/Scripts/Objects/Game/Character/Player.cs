@@ -15,7 +15,13 @@ namespace Project.Scripts.Objects.Game.Character
         [SerializeField] private int _hpFromFood;
         [SerializeField] private int _energyFromFood;
         [SerializeField] private Button _eatButton;
-        [SerializeField] private GameObject _noEnergyPopup; 
+        [SerializeField] private GameObject _noEnergyPopup;
+
+        [Header("Sounds")] 
+        [SerializeField] private AudioSource _coinSound; 
+        [SerializeField] private AudioSource _runningSound; 
+        [SerializeField] private AudioSource _walkingSound; 
+        [SerializeField] private AudioSource _eat; 
 
         public UIMessage EatFood = new UIMessage();
         public Energy Energy { get; set; }
@@ -30,9 +36,12 @@ namespace Project.Scripts.Objects.Game.Character
         void OnTriggerEnter2D(Collider2D col)
         {
             var coin = col.gameObject.GetComponent<Coin>();
-            
-            if(coin != null)
+
+            if (coin != null)
+            {
                 coin.IsCollisionEnter = true;
+                _coinSound.Play();
+            }
 
             var tower = col.gameObject.GetComponent<Place>();
             
@@ -80,6 +89,14 @@ namespace Project.Scripts.Objects.Game.Character
                     } 
                 }
             }
+
+            if (multiplier > 1f && !_runningSound.isPlaying)
+            {
+                _runningSound.Play();
+            } else if (multiplier > 0f && !_walkingSound.isPlaying)
+            {
+                _walkingSound.Play();
+            }
             
             Transform.Move(direction, multiplier);
         }
@@ -91,6 +108,7 @@ namespace Project.Scripts.Objects.Game.Character
 
         public void Eat()
         {
+            _eat.Play();
             if (Math.Abs(Energy.CurrentEnergy - Energy.MaxEnergy) < 0.8f)
             {
                 Health.Heal(_hpFromFood);

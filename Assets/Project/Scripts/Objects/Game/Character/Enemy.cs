@@ -8,6 +8,8 @@ namespace Project.Scripts.Objects.Game.Character
 {
     public class Enemy : Character
     {
+        [SerializeField] private AudioSource _attack; 
+        [SerializeField] private AudioSource _damage; 
         public float DamageDelay;
         public int Damage;
         public float CoinProbability;
@@ -56,6 +58,7 @@ namespace Project.Scripts.Objects.Game.Character
             if (potato != null && !potato.IsCollisionEnemy)
             {
                 Health.Damage(potato.Damage);
+                _damage.Play();
                 potato.IsCollisionEnemy = true; 
             }
         }
@@ -97,10 +100,14 @@ namespace Project.Scripts.Objects.Game.Character
             {
                 health = _triggeredHealths[0]; 
             }
-            
+
             if (_canDamage)
             {
                 health?.Damage(Damage);
+
+                if (health != null)
+                    _attack.Play();
+
                 _canDamage = false;
             }
 

@@ -3,18 +3,22 @@ using UnityEngine;
 
 namespace Project.Scripts.Objects.Animations
 {
-    public class OpenAnimation : MonoBehaviour
-    { 
+    public class ArrowAnimation : MonoBehaviour
+    {
+        [SerializeField] private Vector2 _startPos;
+        [SerializeField] private Vector2 _endPos;
+        [SerializeField] private RectTransform _rect;
+        
         private Sequence _sequence; 
  
         private void OnEnable()
         {
             _sequence = DOTween.Sequence();
+
+            _rect.anchoredPosition = _startPos; 
  
-            transform.localScale = Vector3.zero;
- 
-            _sequence.Append(transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack))
-                .SetUpdate(UpdateType.Normal, true)
+            _sequence.Append(_rect.DOAnchorPos(_endPos, 1f))
+                .SetLoops(-1, LoopType.Yoyo)
                 .Play();
         }
  
