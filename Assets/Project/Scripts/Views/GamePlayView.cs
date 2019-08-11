@@ -198,6 +198,7 @@ namespace Project.Scripts.Views
                     {
                         if (place.Ridge.Health.CurrentHealth == 0)
                         {
+                            place.Ridge.SetEmpty();
                             place.SetEmpty();
                         }
 

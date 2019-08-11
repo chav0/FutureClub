@@ -72,7 +72,7 @@ namespace Project.Scripts.Objects.UI
                 icon.anchoredPosition = new Vector2(Projection(enemy.Transform.Position.x), icon.anchoredPosition.y);
             }
 
-            for (int j = i + 1; j < _enemies.Count; j++)
+            for (int j = i; j < _enemies.Count; j++)
             {
                 var icon = _enemies[j]; 
                 icon.gameObject.SetActive(false);
